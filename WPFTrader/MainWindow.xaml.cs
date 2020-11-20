@@ -107,6 +107,7 @@ namespace WPFTrader
                     lstActions.ItemsSource = gstBdd.getAllActionsByTrader((lstTraders.SelectedItem as Trader).NumTrader);
                     lstActionsNonPossedees.ItemsSource = null;
                     lstActionsNonPossedees.ItemsSource = gstBdd.getAllActionsNonPossedees((lstTraders.SelectedItem as Trader).NumTrader);
+                    txtTotalPortefeuille.Text = gstBdd.getTotalPortefeuille((lstTraders.SelectedItem as Trader).NumTrader).ToString();
                 }
             }
         }
@@ -148,6 +149,7 @@ namespace WPFTrader
                     lstActions.ItemsSource = gstBdd.getAllActionsByTrader((lstTraders.SelectedItem as Trader).NumTrader);
                     lstActionsNonPossedees.ItemsSource = null;
                     lstActionsNonPossedees.ItemsSource = gstBdd.getAllActionsNonPossedees((lstTraders.SelectedItem as Trader).NumTrader);
+                    txtTotalPortefeuille.Text = gstBdd.getTotalPortefeuille((lstTraders.SelectedItem as Trader).NumTrader).ToString();
                 }
             }
         }
