@@ -67,6 +67,7 @@ namespace WPFTrader
 
         private void btnVendre_Click(object sender, RoutedEventArgs e)
         {
+            //Verifie si les valeurs entrée sont des nombres
             bool isConvertible = true;
             try
             {
@@ -92,10 +93,14 @@ namespace WPFTrader
 
                     if (Convert.ToInt16(txtQuantiteVendue.Text) < (lstActions.SelectedItem as ActionPerso).Quantite)
                     {
+                        //Si une partie des actions sont vendues, met a jour la table en fonction de :
+                        //l'action selectionné dans la liste action, le trader selectionné dans la liste trader et la quantité entrée dans le champ
                         gstBdd.UpdateQuantite((lstActions.SelectedItem as ActionPerso).NumAction, (lstTraders.SelectedItem as Trader).NumTrader, (lstActions.SelectedItem as ActionPerso).Quantite - Convert.ToInt16(txtQuantiteVendue.Text));
                     }
                     else
                     {
+                        //Si toutes les actions sont vendues, supprime de la table en fonction de : l'action selectionné dans la liste action,
+                        //le trader selectionné dans la liste trader
                         gstBdd.SupprimerActionAcheter((lstActions.SelectedItem as ActionPerso).NumAction, (lstTraders.SelectedItem as Trader).NumTrader);
                     }
                     lstActions.ItemsSource = null;
@@ -121,7 +126,8 @@ namespace WPFTrader
                 MessageBox.Show("Merci d'entrer une quantité valable");
             }
             else
-            {
+            {   
+                //Verifie si les valeurs entrée sont des nombres
                 bool isConvertible = true;
                 try
                 {
@@ -135,7 +141,9 @@ namespace WPFTrader
                 }
                 if (isConvertible)
                 {
-                    gstBdd.AcheterAction((lstActionsNonPossedees.SelectedItem as MetierTrader.Action).NumAction, (lstTraders.SelectedItem as Trader).NumTrader, Convert.ToDouble(txtQuantiteAchetee.Text), Convert.ToInt16(txtQuantiteAchetee.Text));
+                    //Ajoute une action en fonction de : la selection de la liste action non possédé, la select de la liste trader,
+                    //le nombre entré dans la case prix achat et le nombre entrée dans la case quantité 
+                    gstBdd.AcheterAction((lstActionsNonPossedees.SelectedItem as MetierTrader.Action).NumAction, (lstTraders.SelectedItem as Trader).NumTrader, Convert.ToDouble(txtPrixAchat.Text), Convert.ToInt16(txtQuantiteAchetee.Text));
                     lstActions.ItemsSource = null;
                     lstActions.ItemsSource = gstBdd.getAllActionsByTrader((lstTraders.SelectedItem as Trader).NumTrader);
                     lstActionsNonPossedees.ItemsSource = null;
